@@ -9,6 +9,7 @@
 \usepackage{mathtools}				  	% maths
 \usepackage[none]{hyphenat}			 	% less word breaks more kerning
 \usepackage{microtype}					% less overfull hbox
+\usepackage{prettyref}					% label and reference autoformatting
 \usepackage[hidelinks]{hyperref}		% makes things clickable
 \usepackage[nodoi]{apacite}				% bib style - APA
 \usepackage{natbib}						% bib support for APA
@@ -114,6 +115,36 @@
 
 % Appendix Styles
 \@ifclassloaded{report}{%
+\renewenvironment{appendix}{%
+	\renewcommand*{\thechapter}{\Alph{chapter}}
+	\renewcommand*{\thesection}{A.\arabic{section}}
+	\setcounter{chapter}{0}
+	\chapter*{Appendix}
+	\addcontentsline{toc}{chapter}{Appendix}
+}{}
+
+% Abstract Styles
+\@ifclassloaded{report}{%
+	\renewenvironment{abstract}{%
+		\vspace*{\fill}
+		\section*{\centering \bf Abstract}
+	}{%
+		\vspace*{\fill}
+	}
+}{
+	\renewenvironment{abstract}{%
+		\setlength{\parindent}{0pt}
+		\section*{\hspace{2cm}Abstract}
+		\small
+		\list{}{\leftmargin2cm \rightmargin\leftmargin}
+		\item\relax
+	}{%
+		\endlist\par\bigskip
+	}
+}
+
+% Appendix Styles
+\@ifclassloaded{report}{%
 	\renewenvironment{appendix}{%
 		\renewcommand*{\thechapter}{\Alph{chapter}}
 		\renewcommand*{\thesection}{A.\arabic{section}}
@@ -121,6 +152,14 @@
 		\chapter*{Appendix}
 		\addcontentsline{toc}{chapter}{Appendix}
 	}{}
+}
+
+% Footnote Styles
+\renewcommand*{\@makefntext}[1]{%
+\vspace{4pt}
+\hb@xt@0.5em{\hss\@makefnmark{}}
+\vspace{-3.25ex}
+\parindent=10pt\hangindent=10pt #1
 }
 \makeatother
 
@@ -135,13 +174,17 @@
 % Format Chapter Headings
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter{ }}{0pt}{\Huge\bf}
 
-% Default Code Styles
-\setminted{obeytabs=true, tabsize=2, fontsize=\small}
+% Label and Reference Stylings
+\newrefformat{chapter}{\hyperref[{#1}]{chapter~\ref*{#1}}}
+\newrefformat{section}{\hyperref[{#1}]{section~\ref*{#1}}}
 
 \AtBeginDocument{%
 	% Bib Style
 	\renewcommand{\APACrefYearMonthDay}[3]{\BBOP{#1}\BBCP}
 }
+
+% Default Code Styles
+\setminted{obeytabs=true, tabsize=4, fontsize=\small}
 
 % Math Operators
 \DeclareMathOperator*{\argmax}{argmax}
