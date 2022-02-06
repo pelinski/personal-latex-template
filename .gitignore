@@ -14,7 +14,6 @@
 
 # package specific
 *.pdf
-Pipfile.lock
 
 # dev specific
 *.ai

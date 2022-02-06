@@ -24,11 +24,3 @@ else
 	rm -rf .vscode
 fi
 
-if ! command -v pipenv >/dev/null
-then
-	echo "\033[0;91mWARNING\033[0m: pipenv is not installed."
-	echo "Either run 'rm .vscode/settings.json' and hope for the best..."
-	echo "Or nothing will work."
-	exit
-fi
-pipenv install
