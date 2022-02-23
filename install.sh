@@ -16,6 +16,7 @@ rm -rf personal-latex-template
 rm -rf .git
 rm -rf zotero
 rm .gitignore
+rm readme.md
 
 if $vscode
 then
