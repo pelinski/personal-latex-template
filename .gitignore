@@ -1,5 +1,4 @@
 # tex specific
-/_minted-index
 *.aux
 *.bbl
 *.blg
@@ -11,6 +10,7 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.toc
+._wordcount_selection.tex
 
 # package specific
 *.pdf
